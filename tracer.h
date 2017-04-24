@@ -71,6 +71,8 @@ std::set<V2i> pick_cells(Container&& _points, size_t _cell_size)
 	if (_points.size() < 2 || _cell_size <= 0)
 		return std::set<V2i>();
 
+	Container points = std::forward<Container>(_points);
+
 	auto add_to_set = [](auto& _set, const auto& _to_append)
 	{
 		_set.insert(std::cbegin(_to_append), std::cend(_to_append));
@@ -90,12 +92,12 @@ std::set<V2i> pick_cells(Container&& _points, size_t _cell_size)
 	//Maybe this code works faster
 	std::vector<std::future<std::set<V2i> > > results;
 
-	using PointType = decltype(_points.cbegin())::value_type;
+	using PointType = decltype(points.cbegin())::value_type;
 
-	for (auto it = _points.cbegin(); it != std::prev(_points.cend()); ++it)			//до предпоследнего
+	for (auto it = points.cbegin(); it != std::prev(points.cend()); ++it)			//до предпоследнего
 		results.push_back(std::async(trace_line<PointType>, *it, *std::next(it), _cell_size));
 
-	results.push_back(std::async(trace_line<PointType>, _points.back(), _points.front(), _cell_size));	//линия от последней точки к первой
+	results.push_back(std::async(trace_line<PointType>, points.back(), points.front(), _cell_size));	//линия от последней точки к первой
 
 	for (auto& it : results)
 		add_to_set(cells, it.get());
