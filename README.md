@@ -23,4 +23,4 @@ Usage example:
 ```
 Result example (any GUI and graphical representation is not included)
 
-![alt tag](http://savepic.ru/13633347.png "Example picture")
+![alt tag](https://github.com/feelinfine/tracer/blob/master/image.jpg "Example picture")
