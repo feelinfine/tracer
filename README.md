@@ -1,4 +1,7 @@
 # tracer
+
+WARNING! THIS IMPLEMENTATION IS VERY SLOW! DON'T USE IT IN SERIOUS PROJECTS!
+
 A C++ implementation of "A Fast Voxel Traversal Algorithm for Ray Tracing" (John Amanatides, Andrew Woo). 
 
 Works with any ray direction. Modified for selection by frame or convex polygon on a grid.
